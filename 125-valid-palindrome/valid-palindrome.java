@@ -9,10 +9,10 @@ class Solution {
         while(i<j){
             char c1=s.charAt(i);
             char c2=s.charAt(j);
-            if(!(Character.isDigit(c1) || Character.isLetter(c1))){
+            if(!(Character.isLetterOrDigit(c1))){
                 i++;
             }
-            else if(!(Character.isDigit(c2) || Character.isLetter(c2))){
+            else if(!(Character.isLetterOrDigit(c2))){
                 j--;
             }
             else{
