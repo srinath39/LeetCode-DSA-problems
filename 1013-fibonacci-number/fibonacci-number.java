@@ -3,7 +3,7 @@ class Solution {
        if(n<=1){
         return n;
        }
-       int a,b,c,value;
+       int a,b,c;
        a=0;
        b=1;
        for(int i=2;i<=n;i++){
