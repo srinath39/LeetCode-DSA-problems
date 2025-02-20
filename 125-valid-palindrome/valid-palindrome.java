@@ -1,5 +1,8 @@
 class Solution {
     public boolean isPalindrome(String s) {
+        if(s.isEmpty()){
+            return true;
+        }
         int n=s.length();
         int i=0;
         int j=n-1;
