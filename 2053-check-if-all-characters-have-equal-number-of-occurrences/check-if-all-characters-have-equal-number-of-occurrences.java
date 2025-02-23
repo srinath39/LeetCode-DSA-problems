@@ -1,18 +1,15 @@
 class Solution {
     public boolean areOccurrencesEqual(String s) {
-        HashMap<Character,Integer> map=new HashMap<>();
+        char[] arr=new char[26];
         for(int i=0;i<s.length();i++){
-            if(map.get(s.charAt(i))!=null){
-                map.put(s.charAt(i),map.get(s.charAt(i))+1);
-            }
-            else{
-                map.put(s.charAt(i),0);
+            arr[s.charAt(i)-97]++;
+        }
+        int check=arr[s.charAt(0)-97];
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]!=0&&arr[i]!=check){
+                return false;
             }
         }
-        Set<Integer> set=new HashSet<>(map.values());
-        if(set.size()==1){
-            return true;
-        }
-        return false;
+        return true;
     }
 }
