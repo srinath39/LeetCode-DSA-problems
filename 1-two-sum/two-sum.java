@@ -7,15 +7,16 @@ class Solution {
             res[1]=1;
             return res;
         }
-        for(int i=0;i<n-1;i++){
-                for(int j=i+1;j<n;j++){
-                    if((target-nums[i])==nums[j]){
-                        res[0]=i;
-                        res[1]=j;
-                        return res;
-                    }
-                }
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(map.keySet().contains(target-nums[i])){
+                res[0]=map.get(target-nums[i]);
+                res[1]=i;
             }
+            else{
+                map.put(nums[i],i);
+            }
+        }
         return res;
     }
 }
