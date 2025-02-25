@@ -11,17 +11,8 @@ class Solution {
         HashMap<Integer,Integer> map=new HashMap<>();
         for(int i=0;i<n;i++){
             int ele=nums[i];
-            if(map.containsKey(ele+k)){
-                count =count+map.get(ele+k);
-            }
-            if(map.containsKey(ele-k)){
-                count=count+map.get(ele-k);
-            }
-            if(!map.containsKey(ele)){
-                map.put(ele,1);
-            }else{
-                map.put(ele,map.get(ele)+1);
-            }
+            count =count+map.getOrDefault(ele+k,0)+map.getOrDefault(ele-k,0);            
+            map.put(ele,map.getOrDefault(ele,0)+1);
         }
         return count;
     }
