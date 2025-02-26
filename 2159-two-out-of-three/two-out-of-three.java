@@ -1,28 +1,33 @@
 class Solution {
     public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
-         int[] arr1 = new int[101];
-        int[] arr2 = new int[101];
-        int[] arr3 = new int[101];
-
-        List<Integer> result = new ArrayList<>();
-
-        for (int num : nums1) {
-            arr1[num] = 1;
+        List<Integer> list=new ArrayList<>();
+        Map<Integer,HashSet<Integer>> map=new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            if(!map.containsKey(nums1[i])){
+                map.put(nums1[i],new HashSet<Integer>());
+            }
+            map.get(nums1[i]).add(1);
         }
 
-        for (int num : nums2) {
-            arr2[num] = 1;
+        for(int i=0;i<nums2.length;i++){
+            if(!map.containsKey(nums2[i])){
+                map.put(nums2[i],new HashSet<>());
+            }
+            map.get(nums2[i]).add(2);
         }
 
-        for (int num : nums3) {
-            arr3[num] = 1;
+        for(int i=0;i<nums3.length;i++){
+            if(!map.containsKey(nums3[i])){
+                map.put(nums3[i],new HashSet<>());
+            }
+            map.get(nums3[i]).add(3);
         }
 
-        for (int i = 1; i < 101; i++) {
-            if (arr1[i] + arr2[i] + arr3[i] > 1)
-                result.add(i);
+        for(Map.Entry<Integer,HashSet<Integer>> entry:map.entrySet()){
+            if(entry.getValue().size()>=2){
+                list.add(entry.getKey());
+            }
         }
-
-        return result;
+        return list;
     }
 }
