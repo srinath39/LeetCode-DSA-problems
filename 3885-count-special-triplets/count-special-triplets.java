@@ -1,8 +1,7 @@
 class Solution {
     public int specialTriplets(int[] nums) {
         int n=nums.length;
-       // int m=(int)(1e9+7);
-        int mod = 1_000_000_007;
+        int m=(int)(1e9+7);
         HashMap<Integer,Integer> map=new HashMap<>();
         int[] left=new int[n];
         int[] right=new int[n];
@@ -19,11 +18,10 @@ class Solution {
             }
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
-        int count=0;
+        long count=0L;
         for(int i=0;i<n;i++){
-            //count=(count%m+(((left[i]%m)*(right[i]%m))%m))%m;
-            count = (int)((count + 1L * left[i] * right[i]) % mod);
+            count=(count%m+(1L*left[i]*right[i])%m)%m;
         }
-        return count;
+        return (int)count;
     }
 }
