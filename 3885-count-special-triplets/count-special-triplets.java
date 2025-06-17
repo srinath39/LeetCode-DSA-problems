@@ -20,8 +20,8 @@ class Solution {
         }
         long count=0L;
         for(int i=0;i<n;i++){
-            count=(count%m+(1L*left[i]*right[i])%m)%m;
+            count=(count+(1L*left[i]*right[i]));
         }
-        return (int)count;
+        return (int)(count%m);
     }
 }
