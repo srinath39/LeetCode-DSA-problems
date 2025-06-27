@@ -15,16 +15,14 @@ class Solution {
         int[] dc={0,0,-1,1};
         while(!queue.isEmpty()){
             int sz=queue.size();
-            for(int i=0;i<sz;i++){
-                int[] cur=queue.remove();
-                for(int j=0;j<4;j++){
-                    int x=cur[0]+dr[j];
-                    int y=cur[1]+dc[j];
-                    if(x>=0 && x<=n-1 && y>=0 && y<=m-1 && mat[x][y]==1){
-                        dist[x][y]=dist[cur[0]][cur[1]]+1;
-                        mat[x][y]=0;
-                        queue.add(new int[]{x,y});
-                    }
+            int[] cur=queue.remove();
+            for(int j=0;j<4;j++){
+                int x=cur[0]+dr[j];
+                int y=cur[1]+dc[j];
+                if(x>=0 && x<=n-1 && y>=0 && y<=m-1 && mat[x][y]==1){
+                    dist[x][y]=dist[cur[0]][cur[1]]+1;
+                    mat[x][y]=0;
+                    queue.add(new int[]{x,y});
                 }
             }
         }
