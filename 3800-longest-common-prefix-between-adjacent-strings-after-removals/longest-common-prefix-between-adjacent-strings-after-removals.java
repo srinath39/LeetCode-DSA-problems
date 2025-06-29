@@ -6,9 +6,6 @@ class Solution {
             if(i+1<n){
                 arr[i]=lengthOfCommonPrefix(words[i],words[i+1]);
             }
-            // if(i+2<n){
-            //     arr[i][1]=lengthOfCommonPrefix(words[i],words[i+2],map);
-            // }
         }
         int[] suf=new int[n];
         suf[n-1]=arr[n-1];
