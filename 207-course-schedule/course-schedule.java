@@ -16,34 +16,34 @@ class Solution {
     
     public boolean canFinish(int numCourses, int[][] prerequisites) {
        Graph g=new Graph();
+       int[] indegree=new int[numCourses];
        for(int i=0;i<prerequisites.length;i++){
             g.addEdge(prerequisites[i][1],prerequisites[i][0]);
+            indegree[prerequisites[i][0]]++;
        }
-       int[] visited=new int[numCourses];
-       for(int i=0;i<numCourses;i++){
-        if(visited[i]==0){
-            if(isCoursesCanbeFinished(i,visited,g)){
-                return false;
-            }
-        }
-       }
-       return true;
+       return isCoursesCanbeFinished(indegree,g,numCourses);
     }
 
-    public boolean isCoursesCanbeFinished(int src,int[] visited,Graph g){
-        visited[src]=1;
-        for(int ele:g.getAdjacentNodes(src)){
-            if(visited[ele]==0){
-                if(isCoursesCanbeFinished(ele,visited,g)){
-                    return true;
-                }
-            }else{
-                if(visited[ele]==1){
-                    return true;
+     public boolean isCoursesCanbeFinished(int[] indegree,Graph g,int n){
+        Queue<Integer> q=new LinkedList<>();
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0){
+                q.add(i);
+            }
+        }
+        int k=0;
+        while(!q.isEmpty()){
+            int cur=q.remove();
+            ++k;
+            for(int ele:g.getAdjacentNodes(cur)){
+                --indegree[ele];
+                if(indegree[ele]==0){
+                    q.add(ele);
                 }
             }
         }
-        visited[src]=2;
-        return false;
+        return k==n? true:false;
     }
+
+ 
 }
