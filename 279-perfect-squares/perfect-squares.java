@@ -2,14 +2,14 @@ class Solution {
     public static int m;
     public static int[] dp;
     public int numSquares(int n) {
-        m=0;
-        for(int i=1;i<=n;i++){
-            if(n-(i*i)>=0){
-                ++m;
-            }else{
-                break;
-            }
-        }
+        // m=0;
+        // for(int i=1;i<=n;i++){
+        //     if(n-(i*i)>=0){
+        //         ++m;
+        //     }else{
+        //         break;
+        //     }
+        // }
         dp=new int[n+1];
         Arrays.fill(dp,-1);
         minSubSetSize(n);
@@ -28,7 +28,7 @@ class Solution {
         }
         int val;
         dp[n]=Integer.MAX_VALUE;
-        for(int i=1;i<=m;++i){
+        for(int i=1;i<=((int)Math.sqrt(n)+1);++i){
             if((n-(i*i))>=0){ 
                 val=minSubSetSize(n-(i*i));
                 if(val!=Integer.MAX_VALUE){
