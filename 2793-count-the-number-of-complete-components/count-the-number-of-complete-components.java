@@ -1,6 +1,7 @@
 class Solution {
-    public Map<Integer,LinkedList<Integer>> getGraphData(int V,int[][] edges){
-        Map<Integer,LinkedList<Integer>> map=new HashMap<>();
+    public static Map<Integer,LinkedList<Integer>> map=null;
+    public void loadGraphData(int V,int[][] edges){
+        map=new HashMap<>();
         for(int i=0;i<V;i++){
             map.put(i,new LinkedList<>());
         }
@@ -8,41 +9,40 @@ class Solution {
             map.get(edges[i][0]).add(edges[i][1]);
             map.get(edges[i][1]).add(edges[i][0]);
         }
-        return map;
     }
 
     public int countCompleteComponents(int n, int[][] edges) {
-        Map<Integer,LinkedList<Integer>> map=getGraphData(n,edges);
+        loadGraphData(n,edges);
         int count=0;
-        boolean[] bool=new boolean[n];
-        Stack<Integer> st=new Stack<>();
+        boolean[] visited=new boolean[n];
         for(int i=0;i<n;i++){
-            if(bool[i]){
-                continue;
-            }
-            int no_of_edges=0;
-            int no_of_nodes=0;
-            st.push(i);
-            while(!st.empty()){
-                int val=st.pop();
-                if(bool[val]){
-                    continue;
-                }
-                bool[val]=true;
-                no_of_nodes++;
-                LinkedList<Integer> adjList=map.get(val);
-                for(int j=adjList.size()-1;j>=0;j--){
-                    int ele=adjList.get(j);
-                    no_of_edges++;
-                    if(!bool[ele]){
-                        st.push(ele);
-                    }
-                }
-            }
-            if(((no_of_nodes*(no_of_nodes-1)))==no_of_edges){
-                count++;
+            if(!visited[i] && isCompleteConnectedComponent(i,visited)){
+                ++count;
             }
         }
         return count;
+    }
+
+    public boolean isCompleteConnectedComponent(int src,boolean[] visited){
+        int no_of_nodes=0;
+        int no_of_edges=0;
+        Queue<Integer> q=new LinkedList<>();
+        q.add(src);
+        visited[src]=true;
+        while(!q.isEmpty()){
+            int cur=q.remove();
+            ++no_of_nodes;
+            for(int ele:map.get(cur)){
+                ++no_of_edges;
+                if(!visited[ele]){
+                    visited[ele]=true;
+                    q.add(ele);
+                }
+            }
+        }
+        if((no_of_nodes*(no_of_nodes-1))==no_of_edges){
+            return true;
+        }
+        return false;
     }
 }
