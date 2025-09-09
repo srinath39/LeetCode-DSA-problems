@@ -33,13 +33,13 @@ class Solution {
                 LinkedList<Integer> adjList=map.get(val);
                 for(int j=adjList.size()-1;j>=0;j--){
                     int ele=adjList.get(j);
+                    no_of_edges++;
                     if(!bool[ele]){
                         st.push(ele);
-                        no_of_edges++;
                     }
                 }
             }
-            if(((no_of_nodes*(no_of_nodes-1))/2)==no_of_edges){
+            if(((no_of_nodes*(no_of_nodes-1)))==no_of_edges){
                 count++;
             }
         }
