@@ -6,19 +6,13 @@ class Solution {
         int r=n-1;
         while(l+1<r){
             int mid=(l+r)/2;
-            if(predicate(mid,nums)==0){
-                l=mid;
-            }else{
+            if(nums[mid]<=mid){
                 r=mid;
+            }else{
+                l=mid;
             }
         }
         return nums[l];
     }
 
-    public int predicate(int mid,int[] arr){
-        if(arr[mid]<=mid){
-            return 1;
-        }
-        return 0;
-    }
 }
