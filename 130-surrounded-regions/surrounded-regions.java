@@ -6,7 +6,7 @@ class Solution {
         boolean[][] visited=new boolean[m][n];
         for(int i=0;i<m;++i){
             for(int j=0;j<n;++j){
-                if(board[i][j]=='O' && isBorderCordinate(i,j,m,n)){
+                if(board[i][j]=='O' && (i==0 || i==m-1 || j==0 || j==n-1)){
                     q.add(new int[]{i,j});
                     visited[i][j]=true;
                 }
@@ -35,10 +35,4 @@ class Solution {
         }
     }
 
-    public boolean isBorderCordinate(int i,int j,int m,int n){
-        if(i==0 || i==m-1 || j==0 || j==n-1){
-            return true;
-        }
-        return false;
-    }
 }
