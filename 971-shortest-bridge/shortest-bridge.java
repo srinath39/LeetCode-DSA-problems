@@ -1,9 +1,11 @@
 class Solution {
     public static Queue<int[]> multiSrcBfsQueue;
     public static boolean[][] multiSrcVisited;
+    public static int[][] arr;
     public int shortestBridge(int[][] grid) {
         int[] cordOne=getACordinateWithOne(grid);
         multiSrcBfsQueue=new LinkedList<>();
+        arr=grid;
         loadSingleIslandCordinates(cordOne[0],cordOne[1],grid);
         return getShortestDistance(grid);
     }
