@@ -1,37 +1,24 @@
 class Solution {
-    public static String src;
-    public static String dest;
-    public int[][] mat;
     public int minDistance(String word1, String word2) {
-        src=word1;
-        dest=word2;
-        int n=src.length();
-        int m=dest.length();
-        mat=new int[n][m];
-        for(int[] dp:mat){
-            Arrays.fill(dp,-1);
+        int m=word1.length();
+        int n=word2.length();
+        int[][] mat=new int[m+1][n+1];
+        for(int i=1;i<=m;++i){
+            mat[i][0]=i;
         }
-        return minimumOperation(n-1,m-1);
-    }
+        for(int j=1;j<=n;++j){
+            mat[0][j]=j;
+        }
 
-    public int minimumOperation(int i,int j){
-        if(i<0){
-            return j+1;
+        for(int i=1;i<=m;++i){
+            for(int j=1;j<=n;++j){
+                if(word1.charAt(i-1)==word2.charAt(j-1)){
+                    mat[i][j]=mat[i-1][j-1];
+                }else{
+                    mat[i][j]=Math.min(mat[i-1][j],Math.min(mat[i-1][j-1],mat[i][j-1]))+1;
+                }
+            }
         }
-        if(j<0){
-            return i+1;
-        }
-        if(mat[i][j]!=-1){
-            return mat[i][j];
-        }
-        if(src.charAt(i)==dest.charAt(j)){
-            mat[i][j]=minimumOperation(i-1,j-1);
-            return mat[i][j];
-        }
-        int del=minimumOperation(i-1,j)+1;
-        int sub=minimumOperation(i-1,j-1)+1;
-        int ins=minimumOperation(i,j-1)+1;
-        mat[i][j]=Math.min(del,Math.min(sub,ins));
-        return mat[i][j];
+        return mat[m][n];
     }
 }
