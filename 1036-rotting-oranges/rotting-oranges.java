@@ -11,7 +11,7 @@ class Solution {
             }
         }
         int t=BFS(grid,q);
-        if(isFreshOrangeLeft(grid)){
+        if(isFreshOrangesLeft(grid)){
             return -1;
         }
         if(t==-1){
@@ -27,7 +27,7 @@ class Solution {
         int[] dr={-1,1,0,0};
         int[] dc={0,0,-1,1};
         while(!q.isEmpty()){
-            t++;
+            ++t;
             int sz=q.size();
             for(int i=0;i<sz;i++){
                 int[] cur=q.remove();
@@ -44,7 +44,7 @@ class Solution {
         return t;
     }
 
-    public boolean isFreshOrangeLeft(int[][] grid){
+    public boolean isFreshOrangesLeft(int[][] grid){
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
                 if(grid[i][j]==1){
