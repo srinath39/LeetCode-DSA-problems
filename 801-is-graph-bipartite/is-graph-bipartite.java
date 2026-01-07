@@ -4,7 +4,7 @@ class Solution {
     }
 
     public boolean isBipartiteGraph(int V,int[][] graph) {
-        int[] color=new int[V];
+        int[] color=new int[V];  //0 
         for(int i=0;i<V;i++){
             if(color[i]==0){
                 if(!isComponentABipartite(i,color,-1,graph)){
