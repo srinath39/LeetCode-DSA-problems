@@ -1,7 +1,18 @@
 class Solution {
     public int fib(int n) {
-        double sqrt5=Math.sqrt(5);
-        double dividend=Math.pow((1+sqrt5)/2,n)-Math.pow((1-sqrt5)/2,n);
-        return (int)(dividend/sqrt5);
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        return fibDp(n,dp);
+    }
+
+    public int fibDp(int n,int[] dp) {
+        if(n==0 || n==1){
+            return n;
+        }
+        if(dp[n]!=-1){
+            return dp[n];
+        }
+        dp[n]=fibDp(n-1,dp)+fibDp(n-2,dp);
+        return dp[n];
     }
 }
