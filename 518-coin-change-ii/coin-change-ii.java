@@ -5,18 +5,17 @@ class Solution {
         for(int j=0;j<n;++j){
             mat[0][j]=1;
         }
-        int x,y;
+        int count;
         for(int i=1;i<=amount;++i){
             for(int j=0;j<n;++j){
-                x=0;
-                y=0;
+                count=0;
                 if((i-coins[j])>=0){
-                   x=mat[i-coins[j]][j]; 
+                   count=mat[i-coins[j]][j]; 
                 }
                 if((j-1)>=0){
-                    y=mat[i][j-1];
+                    count+=mat[i][j-1];
                 }
-                mat[i][j]=(x+y);
+                mat[i][j]=count;
             }
         }
         return mat[amount][n-1];
