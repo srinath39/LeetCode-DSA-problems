@@ -4,17 +4,13 @@ class Solution {
     // public int k;
     public int numSquares(int n) {
         int k=(int)Math.sqrt(n);
-        int[] arr=new int[k];
-        for(int i=1;i<=k;++i){
-            arr[i-1]=i*i;
-        }
         int[] dp=new int[n+1];
         Arrays.fill(dp,Integer.MAX_VALUE);
         dp[0]=0;
         for(int s=1;s<=n;++s){
-            for(int i=0;i<k;++i){
-                if((s-arr[i])>=0){
-                    dp[s]=Math.min(dp[s],dp[s-arr[i]]+1);
+            for(int i=1;i<=k;++i){
+                if((s-(i*i))>=0){
+                    dp[s]=Math.min(dp[s],dp[s-(i*i)]+1);
                 }
             }
         }
