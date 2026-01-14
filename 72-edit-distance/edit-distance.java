@@ -1,24 +1,34 @@
 class Solution {
+    public static String A;
+    public static String B;
+    public static int[][] mat;
     public int minDistance(String word1, String word2) {
-        int m=word1.length();
-        int n=word2.length();
-        int[][] mat=new int[m+1][n+1];
-        for(int i=1;i<=m;++i){
-            mat[i][0]=i;
+        int n=word1.length();
+        int m=word2.length();
+        A=word1;
+        B=word2;
+        mat=new int[n][m];
+        for(int[] dp:mat){
+            Arrays.fill(dp,-1);
         }
-        for(int j=1;j<=n;++j){
-            mat[0][j]=j;
-        }
+        return minOperations(n-1,m-1);
+    }
 
-        for(int i=1;i<=m;++i){
-            for(int j=1;j<=n;++j){
-                if(word1.charAt(i-1)==word2.charAt(j-1)){
-                    mat[i][j]=mat[i-1][j-1];
-                }else{
-                    mat[i][j]=Math.min(mat[i-1][j],Math.min(mat[i-1][j-1],mat[i][j-1]))+1;
-                }
-            }
+    public int minOperations(int i,int j){
+        if(i<0){
+            return j+1;
         }
-        return mat[m][n];
+        if(j<0){
+            return i+1;
+        }
+        if(mat[i][j]!=-1){
+            return mat[i][j];
+        }
+        if(A.charAt(i)==B.charAt(j)){
+            mat[i][j]=minOperations(i-1,j-1);
+        }else{
+            mat[i][j]=Math.min(minOperations(i-1,j),Math.min(minOperations(i,j-1),minOperations(i-1,j-1)))+1;
+        }
+        return mat[i][j];
     }
 }
