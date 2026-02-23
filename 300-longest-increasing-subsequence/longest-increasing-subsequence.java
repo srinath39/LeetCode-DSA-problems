@@ -1,17 +1,31 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
         int n=nums.length;
-        int[] dp=new int[n];
-        Arrays.fill(dp,1);
-        int ans=1;
+        int[] arr=new int[n];
+        int p=0;
+        arr[p++]=nums[0];
         for(int i=1;i<n;++i){
-            for(int j=0;j<i;++j){
-                if(nums[j]<nums[i]){
-                    dp[i]=Math.max(dp[i],dp[j]+1);
-                }
+            int ele=arr[p-1];
+            if(ele<nums[i]){
+                arr[p++]=nums[i];
+            }else{
+                setElementInList(arr,nums[i],p);
             }
-            ans=Math.max(ans,dp[i]);
         }
-        return ans;
+        return p;
+    }
+
+    public void setElementInList(int[] arr,int k,int p){
+        int L=-1;
+        int R=p-1;
+        while((L+1)<R){
+            int m=(L+R)/2;
+            if(arr[m]<k){
+                L=m;
+            }else{
+                R=m;
+            }
+        }
+        arr[R]=k;
     }
 }
