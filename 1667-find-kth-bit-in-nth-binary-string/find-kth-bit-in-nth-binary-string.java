@@ -10,10 +10,11 @@ class Solution {
     }
 
     public int kthBitinBinaryString(int n,int k){
+        // System.out.println(k);
         if(k==1){
             return 0;
         }
-        int c=(dp[n]/2)+1;
+        int c=(int)Math.ceil((double)dp[n]/2);
         if(k==c){
             return 1;
         }else if(k<c){
