@@ -3,14 +3,16 @@ class Solution {
         char[] arr=s.toCharArray();
         int n=arr.length;
         int i=0;
-        HashMap<Character,Integer> map=new HashMap<>();
+        int[] dat=new int[128+1];
+        Arrays.fill(dat,-1);
         int ans=0;
         for(int j=0;j<n;++j){
-            if(!map.containsKey(arr[j]) || map.get(arr[j])<i){
-                map.put(arr[j],j);
+            int asc=arr[j];
+            if(dat[asc]==-1 || dat[asc]<i){
+                dat[asc]=j;
             }else{
-                i=map.get(arr[j])+1;
-                map.put(arr[j],j);
+                i=dat[asc]+1;
+                dat[asc]=j;
             }
             ans=Math.max(ans,j-i+1);
         }
