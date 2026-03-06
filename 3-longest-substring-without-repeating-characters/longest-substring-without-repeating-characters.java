@@ -6,12 +6,9 @@ class Solution {
         HashMap<Character,Integer> map=new HashMap<>();
         int ans=0;
         for(int j=0;j<n;++j){
-            if(!map.containsKey(arr[j])){
+            if(!map.containsKey(arr[j]) || map.get(arr[j])<i){
                 map.put(arr[j],j);
             }else{
-                for(int k=i;k<map.get(arr[j]);++k){
-                    map.remove(arr[k]);
-                }
                 i=map.get(arr[j])+1;
                 map.put(arr[j],j);
             }
