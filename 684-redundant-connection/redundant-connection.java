@@ -1,36 +1,36 @@
 class Solution {
+    public static int[] parent;
     public int[] findRedundantConnection(int[][] edges) {
         int n=edges.length;
-        int[] parent=new int[n+1];
+        parent=new int[n+1];
         Arrays.fill(parent,-1);
-        for(int i=0;i<n;i++){
-            if(merge(edges[i][0],edges[i][1],parent)){
+        for(int i=0;i<n;++i){
+            if(merger(edges[i][0],edges[i][1])){
                 return new int[]{edges[i][0],edges[i][1]};
             }
         }
         return new int[]{};
     }
 
-    public int findLeader(int v,int[] parent){
-        if(parent[v]<0){
-            return v;
-        }
-        return parent[v]=findLeader(parent[v],parent);
-    }
-
-    public boolean merge(int a,int b,int[] parent){
+    public boolean merger(int a, int b){
         int x,y;
-        if((x=findLeader(a,parent))==(y=findLeader(b,parent))){
+        if((x=findLeader(a))==(y=findLeader(b))){
             return true;
         }
-        if(parent[x]>parent[y]){
-            int temp=y;
-            y=x;
-            x=temp;
+        if(parent[y]<parent[x]){
+            int t=x;
+            x=y;
+            y=t;
         }
         parent[x]+=parent[y];
         parent[y]=x;
         return false;
     }
 
+    public int findLeader(int x){
+        if(parent[x]<0){
+            return x;
+        }
+        return parent[x]=findLeader(parent[x]);
+    }
 }
