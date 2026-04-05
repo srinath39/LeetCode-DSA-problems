@@ -6,26 +6,28 @@ class Solution {
         }
         int count=0;
         for(int i=0;i<words.length;++i){
-            int prev=-1;
-            for(int j=0;j<words[i].length();++j){
-                char ch=words[i].charAt(j);
-                if(map.containsKey(ch)){
-                    int newIndex=getIndexGreaterThanPrev(map.get(ch),prev);
-                    if(newIndex==-1 || newIndex<=prev){
-                        prev=-1;
-                        break;
-                    }
-                    prev=newIndex;
-                }else{
-                    prev=-1;
-                    break;
-                }
-            }
-            if(prev!=-1){
+            if(processString(words[i],map)){
                 ++count;
             }
         }
         return count;
+    }
+
+    public boolean processString(String str,HashMap<Character,ArrayList<Integer>> map){
+            int prev=-1;
+            for(int j=0;j<str.length();++j){
+                char ch=str.charAt(j);
+                if(map.containsKey(ch)){
+                    int newIndex=getIndexGreaterThanPrev(map.get(ch),prev);
+                    if(newIndex==-1 || newIndex<=prev){
+                       return false;
+                    }
+                    prev=newIndex;
+                }else{
+                    return false;
+                }
+            }
+            return true;
     }
 
     public int getIndexGreaterThanPrev(ArrayList<Integer> arr,int k){
