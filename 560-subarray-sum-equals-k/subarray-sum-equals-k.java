@@ -8,8 +8,10 @@ class Solution {
             pre[i]=pre[i-1]+nums[i];
         }
         int count=0;
-        map.put(0,1);
         for(int i=0;i<n;++i){
+            if(pre[i]==k){
+                ++count;
+            }
             if(map.containsKey(pre[i]-k)){
                 count+=map.get(pre[i]-k);
             }
